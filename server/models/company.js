@@ -8,57 +8,35 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 let Schema = mongoose.Schema;
 
-let usuarioSchema = new Schema({
-    nombre: {
+let companySchema = new Schema({
+    name: {
         type: String,
-        required: [true, 'El nombre es necesario']
+        required: [true, 'Name must be necessary']
     },
     email: {
         type: String,
         unique: true,
-        required: [true, 'El correo es necesario']
+        required: [true, 'Email must be neccesary']
     },
-    estado: {
+    state: {
         type: Boolean,
         default: true
     },
-    descripcion: {
+    description: {
         type: String,
         required: false
     },
-    valoracion: {
+    score: {
         type: Number,
         required: false
     },
     password: {
         type: String,
-        required: [true, 'La contraseña es obligatoria']
-    },
-    habilidades: {
-        type: Array,
-        default: []
-    },
-    cursos: {
-        type: Array,
-        default: {
-            'nombre': '',
-            'ruta': ''
-        }
-    },
-    certificados: {
-        type: Array,
-        default: {
-            'nombre': '',
-            'imgCert': ''
-        }
+        required: [true, 'Password must be necessary']
     },
     img: {
         type: String,
         required: false
-    },
-    google: {
-        type: Boolean,
-        default: false
     },
     linkedin: {
         type: Boolean,
@@ -68,19 +46,23 @@ let usuarioSchema = new Schema({
         type: Boolean,
         default: false
     },
-    tipoUsuario: {
+    userType: {
         type: String,
-        default: 'INDIVIDUAL_ROLE',
+        default: 'COMPANY_ROLE',
         enum: rolesValidos
     },
-    codPostal: {
+    postalCode: {
         type: Number,
+        required: true
+    },
+    cif: {
+        type: String,
         required: true
     }
 
 });
 
-usuarioSchema.methods.toJSON = function() {
+companySchema.methods.toJSON = function() {
 
     let user = this;
     let userObject = user.toObject();
@@ -90,6 +72,6 @@ usuarioSchema.methods.toJSON = function() {
 
 }
 
-usuarioSchema.plugin(uniqueValidator, { message: '{PATH} debe de ser único' });
+companySchema.plugin(uniqueValidator, { message: '{PATH} must be unique' });
 
-module.exports = mongoose.model('Usuario', usuarioSchema);
+module.exports = mongoose.model('Company', companySchema);

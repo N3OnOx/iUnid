@@ -4,23 +4,23 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 let Schema = mongoose.Schema;
 
-let proyectoExtSchema = new Schema({
-    pertenece: {
+let externalProjectSchema = new Schema({
+    owner: {
         type: Schema.Types.ObjectId,
-        ref: 'Usuario'
+        ref: 'User'
     },
-    nombre: {
+    name: {
         type: String,
         required: true
     },
-    descripcion: {
+    description: {
         type: String,
         required: true
     },
-    enlace: {
+    url: {
         type: String
     }
 });
 
 
-module.exports = mongoose.model('ProyectoExterno', proyectoExtSchema);
+module.exports = mongoose.model('ExternalProject', externalProjectSchema);

@@ -1,42 +1,64 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
-/* let rolesValidos = {
+let validRoles = {
     values: ['ADMIN_ROLE', 'USER_ROLE'],
     message: '{VALUE} no es un rol válido'
-}; */
+}; 
 
 let Schema = mongoose.Schema;
 
-let empresaSchema = new Schema({
-    nombre: {
+let userSchema = new Schema({
+    name: {
         type: String,
-        required: [true, 'El nombre es necesario']
+        required: [true, 'Name must be necessary']
     },
     email: {
         type: String,
         unique: true,
-        required: [true, 'El correo es necesario']
+        required: [true, 'Email must be necessary']
     },
-    estado: {
+    state: {
         type: Boolean,
         default: true
     },
-    descripcion: {
+    description: {
         type: String,
         required: false
     },
-    valoracion: {
+    score: {
         type: Number,
         required: false
     },
     password: {
         type: String,
-        required: [true, 'La contraseña es obligatoria']
+        required: [true, 'Password must be necessary']
+    },
+    skills: {
+        type: Array,
+        default: []
+    },
+    courses: {
+        type: Array,
+        default: {
+            'nombre': '',
+            'ruta': ''
+        }
+    },
+    certificates: {
+        type: Array,
+        default: {
+            'nombre': '',
+            'imgCert': ''
+        }
     },
     img: {
         type: String,
         required: false
+    },
+    google: {
+        type: Boolean,
+        default: false
     },
     linkedin: {
         type: Boolean,
@@ -46,23 +68,19 @@ let empresaSchema = new Schema({
         type: Boolean,
         default: false
     },
-    tipoUsuario: {
+    userType: {
         type: String,
-        default: 'EMPRESA_ROLE',
-        enum: rolesValidos
+        default: 'INDIVIDUAL_ROLE',
+        enum: validRoles
     },
-    codPostal: {
+    postalCode: {
         type: Number,
-        required: true
-    },
-    cif: {
-        type: String,
         required: true
     }
 
 });
 
-empresaSchema.methods.toJSON = function() {
+userSchema.methods.toJSON = function() {
 
     let user = this;
     let userObject = user.toObject();
@@ -72,6 +90,6 @@ empresaSchema.methods.toJSON = function() {
 
 }
 
-empresaSchema.plugin(uniqueValidator, { message: '{PATH} debe de ser único' });
+userSchema.plugin(uniqueValidator, { message: '{PATH} must be unique' });
 
-module.exports = mongoose.model('Empresa', empresaSchema);
+module.exports = mongoose.model('User', userSchema);

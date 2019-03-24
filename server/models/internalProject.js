@@ -9,16 +9,16 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 let Schema = mongoose.Schema;
 
-let proyectoIntSchema = new Schema({
-    pertenece: {
+let internalProjectSchema = new Schema({
+    owner: {
         type: Schema.Types.ObjectId,
-        ref: 'Empresa'
+        ref: 'Company'
     },
-    nombre: {
+    name: {
         type: String,
         required: true
     },
-    descripcion: {
+    description: {
         type: String,
         required: true
     },
@@ -26,46 +26,46 @@ let proyectoIntSchema = new Schema({
         type: Array,
         default: []
     },
-    archivos: {
+    files: {
         type: Array,
         default: {
-            'nombre': '',
-            'ruta': ''
+            'name': '',
+            'route': ''
         }
     },
-    maxPrecio: {
+    maxPrice: {
         type: Number,
         default: 0
     },
-    minPrecio: {
+    minPrice: {
         type: Number,
         default: 0
     },
-    fechaEntrega: {
+    deliveryDate: {
         type: Date,
         required: true
     },
-    contraOferta: {
+    counteroffer: {
         type: Boolean,
         default: false
     },
-    estado: {
+    state: {
         type: String,
-        default: 'Abierto',
+        default: 'Open',
         enum: estadosProyecto
     },
-    fechaCreacion: {
+    initialDate: {
         type: Date,
         required: true
     },
-    entregaIntermeda: {
+    delivery: {
         type: Array,
         default: {
-            'nombre': '',
-            'ruta': ''
+            'name': '',
+            'route': ''
         }
     }
 });
 
 
-module.exports = mongoose.model('ProyectoInterno', proyectoIntSchema);
+module.exports = mongoose.model('InternalProject', internalProjectSchema);

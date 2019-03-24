@@ -1,29 +1,29 @@
 // =====================================
-// Puerto
+// Port
 // =====================================
 
 process.env.PORT = process.env.PORT || 3000;
 
 // =====================================
-// Entorno
+// Environment
 // =====================================
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 // =====================================
-// Vencimiento token
+// Token expiration
 // =====================================
 
-process.env.CADUCIDAD_TOKEN = '48h';
+process.env.tokenExpiration = '48h';
 
 // =====================================
-// Seed autenticacion
+// Seed authentication
 // =====================================
 
 process.env.SEED = process.env.SEED || 'este-es-el-seed-desarrollo';
 
 // =====================================
-// Base de datos
+// Database
 // =====================================
 
 let urlDB;

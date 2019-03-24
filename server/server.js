@@ -22,9 +22,9 @@ app.use(require('./routes/index'));
 mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true }, (err, res) => {
     if (err) throw err;
 
-    console.log('Base de datos ONLINE');
+    console.log('Database ONLINE');
 });
 
 app.listen(process.env.PORT, () => {
-    console.log(`Escuhando puerto: ${process.env.PORT}`);
+    console.log(`Port: ${process.env.PORT}`);
 });
